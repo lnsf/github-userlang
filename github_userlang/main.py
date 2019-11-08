@@ -1,5 +1,6 @@
 from github import Github
 from getpass import getpass
+import matplotlib.pyplot as plt
 from time import sleep
 
 
