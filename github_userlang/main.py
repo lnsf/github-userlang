@@ -1,6 +1,8 @@
 from github import Github
 from getpass import getpass
 import matplotlib.pyplot as plt
+import json
+import os
 from time import sleep
 
 
@@ -32,7 +34,20 @@ def main():
         else:
             langs[r.language] += 1
 
-    sorted(langs)
+    sorted_langs = sorted(langs.items(), key=lambda x: x[1], reverse=True)
+    print(sorted_langs)
+
+    # pie chart
+    colors = []
+    with open(os.getcwd() + '/github-colors' + '/colors.json', 'r') as file:
+        j = json.load(file)
+        for lang in sorted_langs:
+            if lang[0] in j.keys():
+                colors.append(j[lang[0]]['color'])
+            else:
+                colors.append('#FFFFFF')
+
+    print(colors)
 
 
 if __name__ == "__main__":
