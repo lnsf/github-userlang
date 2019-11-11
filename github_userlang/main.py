@@ -29,13 +29,17 @@ def main():
 
     langs = {}
     for r in repos:
+        if r.language is None:
+            continue
         if r.language not in langs.keys():
             langs[r.language] = 1
         else:
             langs[r.language] += 1
 
+    counted_repos = 0
+    for count in langs.values():
+        counted_repos += count
     sorted_langs = sorted(langs.items(), key=lambda x: x[1], reverse=True)
-    print(sorted_langs)
 
     # pie chart
     colors = []
@@ -47,7 +51,15 @@ def main():
             else:
                 colors.append('#FFFFFF')
 
-    print(colors)
+    labels = [e[0] for e in sorted_langs]
+    sizes = [e[1] for e in sorted_langs]
+
+    fig, ax = plt.subplots()
+    ax.set_title(g_username + "\'s repositories")
+    ax.pie(sizes, labels=labels, colors=colors,
+           startangle=90, counterclock=False, shadow=True, autopct=(lambda p: ("{:.1f}%\n({:d})").format(p, int(p * counted_repos / 100))))
+    ax.axis('equal')
+    plt.show()
 
 
 if __name__ == "__main__":
