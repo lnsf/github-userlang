@@ -5,18 +5,18 @@ Create pie chart about programming languages the user used
 
 ## setup
 
-Clone this repository and then install it using pip3.
+Clone this repository and then install requirements.
 
 ```sh
-git clone https://github.com/lnsf/github-userlang
+git clone https://github.com/lnsf/github-userlang --recurse-submodules
 cd github-userlang
-pip3 install -U .
+pip3 install -r requirements.txt
 ```
 
 ## usage
 
 ```sh
-gh-userlang
+python3 main.py
 ```
 
 Then some prompt will appear.  
